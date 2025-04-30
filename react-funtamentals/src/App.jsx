@@ -1,11 +1,12 @@
-import StatusTest from "./components/StatusTest"
-import Title from "./components/Title"
+import StatusTest from "./components/StatusTest/StatusTest"
+import Title from "./components/Title/index"
+import styles from "./App.module.css"
 
 export default function App(){
   
 
   return (
-    <div>
+    <div className={styles.app}>
       <Title/>
       <StatusTest/>
     </div>
