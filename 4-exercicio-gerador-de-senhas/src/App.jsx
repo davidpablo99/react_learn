@@ -4,7 +4,9 @@ import Input from "./components/Input"
 export default function App(){
   const [password, setPassword] = useState("")
   const [copyText, setCopyText] = useState("Copiar")
-  const [passwordSize, setPasswordSize] = useState(12)
+  const [custumSize, setCustumSize] = useState(12)
+  const [ showInput, setShowInput ] = useState(false)
+  const passwordSize = showInput ? custumSize : 8
 
   function copyToClipboard(){
     window.navigator.clipboard.writeText(password)
@@ -26,9 +28,20 @@ export default function App(){
     <div className="wrapper">
       <h1>Gerador de senhas</h1>
       <div>
-        <label htmlFor="passwordSize">Tamanho:</label>
-        <Input passwordSize={passwordSize} setPasswordSize={setPasswordSize}/>
+        <label htmlFor="showInput">Customizar Tamanho:</label>
+        <input 
+          type="checkbox"
+          id="showinput"
+          value={showInput}
+          onChange={()=> setShowInput(currentState => !currentState)}
+          />
       </div>
+      {showInput ? (
+        <div>
+          <label htmlFor="passwordSize">Tamanho:</label>
+          <Input passwordSize={custumSize} setPasswordSize={setCustumSize}/>
+        </div>
+      ) : null}
       <button onClick={generate}>Gerar senha de {passwordSize} caracteres!</button>
       <button onClick={copyToClipboard}>{copyText}</button>
       <div>{password}</div>
